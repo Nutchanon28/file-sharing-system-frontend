@@ -36,7 +36,7 @@ const RHFFileUpload = ({
       const newFile = acceptedFiles[0]
 
       setFile(newFile)
-      setValue(name, newFile)
+      setValue(name, acceptedFiles)
       trigger()
     },
     [name, setFile, setValue, trigger]
@@ -67,14 +67,15 @@ const RHFFileUpload = ({
         <input {...getInputProps()} />
 
         <div
-          className='relative flex h-[48px] w-[48px] cursor-pointer items-center justify-center text-white'
+          className='relative flex cursor-pointer items-center justify-center text-white'
           onClick={getRootProps().onClick}
         >
           <Image
             src={filePreviewUrl}
             // loader={() => filePreviewUrl}
             alt='upload'
-            fill
+            width={48}
+            height={48}
             className='object-contain'
           />
         </div>
