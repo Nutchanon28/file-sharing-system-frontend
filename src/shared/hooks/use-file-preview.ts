@@ -33,7 +33,7 @@ const useFilePreview = () => {
     updateFilePreview()
   }, [file, updateFilePreview])
 
-  return { setFile, filePreviewUrl }
+  return { file, setFile, filePreviewUrl }
 }
 
 export default useFilePreview

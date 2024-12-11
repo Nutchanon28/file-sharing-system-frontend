@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { fileSharingFormSchema } from '../modules/file-sharing/_constants/file-sharing.constant'
 import RHFFileUpload from '@/shared/components/hook-form/rhf-file-upload'
 import { useGetSharedFile } from '@/modules/file-sharing/_hooks/use-get-shared-file'
+import { Button } from '@/shared/components/ui/button'
 
 export default function Home() {
   type FileSharingFormValues = z.infer<typeof fileSharingFormSchema>
@@ -36,9 +37,7 @@ export default function Home() {
           >
             <RHFFileUpload name='sharedFile' label='ไฟล์ที่ต้องการแชร์' />
 
-            <button className='bg-pink-200 hover:bg-pink-500 hover:text-white rounded-xl p-4 mt-4 font-medium'>
-              แชร์ไฟล์นี้
-            </button>
+            <Button className='mt-4'>แชร์ไฟล์นี้</Button>
           </form>
         </FormProvider>
       </main>

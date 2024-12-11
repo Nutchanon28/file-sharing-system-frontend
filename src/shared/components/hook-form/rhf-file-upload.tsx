@@ -6,7 +6,10 @@ import { cn } from '@/lib/utils'
 import { useDropzone } from 'react-dropzone'
 import { useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
-import useFilePreview from './_hooks/use-file-preview'
+import { Button } from '../ui/button'
+import useFilePreview from '@/shared/hooks/use-file-preview'
+import FilePreviewDialog from '../file-preview-dialog'
+import { useBoolean } from '@/shared/hooks/helpers'
 
 type Variant = 'horizontal' | 'vertical'
 
@@ -23,7 +26,8 @@ const RHFFileUpload = ({
   variant = 'horizontal',
   isLoading,
 }: Props) => {
-  const { setFile, filePreviewUrl } = useFilePreview()
+  const { file, setFile, filePreviewUrl } = useFilePreview()
+  const previewDialogController = useBoolean()
 
   const {
     trigger,
@@ -47,10 +51,19 @@ const RHFFileUpload = ({
     multiple: false,
   })
 
+  // return a function to avoid complex typing headaches
+  const createImageOnClickHandler = useCallback(() => {
+    if (file) {
+      return previewDialogController.onTrue
+    }
+
+    return getRootProps().onClick
+  }, [file, getRootProps, previewDialogController.onTrue])
+
   return (
     <div>
       {label && (
-        <label className='mb-4 block text-xl text-pink-500 font-bold'>
+        <label className='mb-4 block text-xl text-primary font-bold'>
           {label}
         </label>
       )}
@@ -66,16 +79,14 @@ const RHFFileUpload = ({
       >
         <input {...getInputProps()} />
 
-        <div
-          className='relative flex h-[100px] w-[100px] flex-shrink-0 cursor-pointer items-center justify-center'
-          onClick={getRootProps().onClick}
-        >
+        <div className='relative flex h-[200px] sm:h-[100px] w-full sm:w-[100px] flex-shrink-0 cursor-pointer items-center justify-center'>
           <Image
             src={filePreviewUrl}
             // loader={() => filePreviewUrl}
             alt='upload'
             fill
             className='object-cover'
+            onClick={createImageOnClickHandler()}
           />
         </div>
 
@@ -87,29 +98,38 @@ const RHFFileUpload = ({
         >
           <p>
             อัพโหลดไฟล์ที่มีนามสกุล{' '}
-            <span className='text-pink-500 font-medium'>JPG, PNG หรือ PDF</span>{' '}
+            <span className='text-primary font-medium'>JPG, PNG หรือ PDF</span>{' '}
             โดยขนาดของไฟล์ต้อง{' '}
-            <span className='text-pink-500 font-medium'>ไม่เกิน 10MB</span>
+            <span className='text-primary font-medium'>ไม่เกิน 10MB</span>
           </p>
-          <p className='text-pink-500 font-medium'>สามารถลากไฟล์วางได้</p>
+          <p className='text-primary font-medium'>สามารถลากไฟล์วางได้!</p>
         </div>
 
         {isLoading ? (
           //   <LoadingSpinner className='text-purple-300' />
           <p>loading...</p>
         ) : (
-          <button
-            className='z-10 bg-pink-200 rounded-xl font-medium p-3 text-background hover:bg-pink-500 hover:text-white whitespace-nowrap'
+          <Button
+            className='z-10 whitespace-nowrap'
             type='button'
             onClick={getRootProps().onClick}
           >
             เลือกไฟล์
-          </button>
+          </Button>
         )}
       </div>
 
       {errors[name] && (
         <p className='mt-4 text-red-600'>* {errors[name]?.message as string}</p>
+      )}
+
+      {file && (
+        <FilePreviewDialog
+          file={file}
+          filePreviewUrl={filePreviewUrl}
+          controller={previewDialogController}
+          onChangeFile={getRootProps().onClick}
+        />
       )}
 
       {/* {error && <p className='mt-1 text-error-300'>{error}</p>} */}
