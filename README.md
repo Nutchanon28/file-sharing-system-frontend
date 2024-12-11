@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Docs
 
-## Getting Started
+github.com/Nutchanon28/file-sharing-system
 
-First, run the development server:
+User Story: As a professor in a department in a certain university, I want a file sharing system with permission, so that I can share my files with people in my department only.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech Stack and Why?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Classic Next.js, Tailwind
+- Popular, convinient and used in many real industry projects
+- Handle most things you needed, ex: routing, caching, server/client components etc.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Shad/cn - UI Component
+- Modern, popular, and easy to used
+- Require less setup than MUI (probably)
+- Alternatives: MUI and others
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### React Hook Form - Input Validation
+- Popular, made validation easy
+- I don't even know the alternatives yet
 
-## Learn More
+### Zod - Additional Input Validation
+- Validate input for each type (text, long text, files, etc.)
+- Easy way to show error messages based on input types
+- Alternatives (I don't think it matters much what you pick?): Yup
 
-To learn more about Next.js, take a look at the following resources:
+### GraphQL - API to connect with Backend
+- More efficient than REST but maybe a bit overkill
+- Somewhat Popular
+- Automate everything
+- I want to learn it
+- Alternatives: REST api
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Apollo Client - GraphQL Library
+- Feature-rich, handles file uploads and RBAC with caching
+- Has state management features, which I want to learn
+- Might be a bit overkill for this project since it's not that large scale
+- Alternatives: Urql, GraphQL Request, Axios
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## References
 
-## Deploy on Vercel
+How to Fetch Data in React from a GraphQL API
+https://www.freecodecamp.org/news/5-ways-to-fetch-data-react-graphql/
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Apollo with Next.js 13
+https://www.apollographql.com/blog/next-js-getting-started
