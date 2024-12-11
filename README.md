@@ -44,3 +44,6 @@ https://www.freecodecamp.org/news/5-ways-to-fetch-data-react-graphql/
 
 Apollo with Next.js 13
 https://www.apollographql.com/blog/next-js-getting-started
+
+TypeScript with Apollo Client
+https://www.apollographql.com/docs/react/development-testing/static-typing

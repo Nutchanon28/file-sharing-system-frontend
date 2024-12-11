@@ -1,6 +1,7 @@
-import { useQuery, gql } from '@apollo/client'
+import { gql } from '@/__generated__'
+import { useQuery } from '@apollo/client'
 
-const QUERY = gql`
+const QUERY = gql(`
   query SharedFiles {
     sharedFiles {
       id
@@ -10,7 +11,6 @@ const QUERY = gql`
       updatedAt
     }
   }
-`
+`)
 
-// TODO: Make this type safe?
 export const useGetSharedFile = () => useQuery(QUERY)
