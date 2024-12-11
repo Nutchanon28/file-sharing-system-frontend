@@ -50,7 +50,7 @@ const RHFFileUpload = ({
   return (
     <div>
       {label && (
-        <label className='mb-4 block text-xl font-bold text-white'>
+        <label className='mb-4 block text-xl text-pink-500 font-bold'>
           {label}
         </label>
       )}
@@ -59,7 +59,7 @@ const RHFFileUpload = ({
         {...getRootProps()}
         onClick={() => {}}
         className={cn(
-          'z-0 flex flex-col items-center justify-between gap-6 rounded-lg border-2 border-dashed border-gray p-6 text-center sm:flex-row sm:text-start lg:gap-0',
+          'z-0 flex flex-col items-center justify-between gap-6 rounded-lg border-2 border-dashed border-pink-100 p-6 text-center sm:flex-row sm:text-start lg:gap-0',
           //   (errors[name] ?? error) && 'border-error-300',
           variant === 'vertical' && '!flex-col'
         )}
@@ -67,28 +67,31 @@ const RHFFileUpload = ({
         <input {...getInputProps()} />
 
         <div
-          className='relative flex cursor-pointer items-center justify-center text-white'
+          className='relative flex h-[100px] w-[100px] flex-shrink-0 cursor-pointer items-center justify-center'
           onClick={getRootProps().onClick}
         >
           <Image
             src={filePreviewUrl}
             // loader={() => filePreviewUrl}
             alt='upload'
-            width={48}
-            height={48}
-            className='object-contain'
+            fill
+            className='object-cover'
           />
         </div>
 
         <div
           className={cn(
-            'flex flex-col gap-4',
+            'flex flex-col px-4',
             variant === 'vertical' && 'my-4 items-center'
           )}
         >
-          <p className='text-white'>
-            JPG, PNG or PDF, file size no more than 10MB
+          <p>
+            อัพโหลดไฟล์ที่มีนามสกุล{' '}
+            <span className='text-pink-500 font-medium'>JPG, PNG หรือ PDF</span>{' '}
+            โดยขนาดของไฟล์ต้อง{' '}
+            <span className='text-pink-500 font-medium'>ไม่เกิน 10MB</span>
           </p>
+          <p className='text-pink-500 font-medium'>สามารถลากไฟล์วางได้</p>
         </div>
 
         {isLoading ? (
@@ -96,17 +99,17 @@ const RHFFileUpload = ({
           <p>loading...</p>
         ) : (
           <button
-            className='z-10 bg-white px-5 py-5 font-bold text-background hover:bg-white/90'
+            className='z-10 bg-pink-200 rounded-xl font-medium p-3 text-background hover:bg-pink-500 hover:text-white whitespace-nowrap'
             type='button'
             onClick={getRootProps().onClick}
           >
-            Select File
+            เลือกไฟล์
           </button>
         )}
       </div>
 
       {errors[name] && (
-        <p className='mt-1 text-error-300'>{errors[name]?.message as string}</p>
+        <p className='mt-4 text-red-600'>* {errors[name]?.message as string}</p>
       )}
 
       {/* {error && <p className='mt-1 text-error-300'>{error}</p>} */}

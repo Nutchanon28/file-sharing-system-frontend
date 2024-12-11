@@ -23,7 +23,7 @@ export default function Home() {
     console.log('data = ', JSON.stringify(data))
   }
 
-  const { data } = useGetSharedFile();
+  const { data } = useGetSharedFile()
   console.log('fetched data = ', data)
 
   return (
@@ -36,7 +36,9 @@ export default function Home() {
           >
             <RHFFileUpload name='sharedFile' label='ไฟล์ที่ต้องการแชร์' />
 
-            <button className='bg-blue-200 rounded-md p-4 mt-4'>submit</button>
+            <button className='bg-pink-200 hover:bg-pink-500 hover:text-white rounded-xl p-4 mt-4 font-medium'>
+              แชร์ไฟล์นี้
+            </button>
           </form>
         </FormProvider>
       </main>
